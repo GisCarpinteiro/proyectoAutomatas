@@ -94,57 +94,13 @@ public class Tokens {
     }
 
     Boolean numberDecimalValidation(String word) {
-
-        /*validar el signo negativo
-         * validar que sea un numero
-         * despues del signo negativo validar sacando el residuo para saber si es o no entero
-         * */
-        /*try {
-            //return isDecimalNumber(word);
-            //return (Double.parseDouble(word) % 1 >= 1);
-            //return true;
-        } catch (NumberFormatException nfe){
-            return false;
-        }*/
-        //validar solo si tiene punto
-        /*boolean isValid = false;
-        for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == '-') {
-                if (Double.parseDouble(word) % 2 >= 1) {
-                    isValid = true;
-                }
-            } else if (Double.parseDouble(word) % 2 >= 1) {
-                isValid = true;
-            }
-            return isValid;
-        }*/
-
-        /*try {
-            Double.parseDouble(word);
-            if () {
-                return true;
-            }
-            return (Double.parseDouble(word) % 1 >= 1 || Double.parseDouble(word) % 1 >= 0 && word.contains(".") && Double.parseDouble(word) < 0);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }*/
-
         boolean isValid = false;
-        /*if (word.contains("-") || Double.parseDouble(word) % 2 == 0 || Double.parseDouble(word) % 2 >= 1 || Double.parseDouble(word) % 1 >= 1
-                && word.contains(".")) {
-            isValid = true;
-        } else if (Double.parseDouble(word) % 2 == 0 || Double.parseDouble(word) % 2 >= 1 || Double.parseDouble(word) % 1 >= 1
-                && word.contains(".")) {
-            isValid = true;
-        }*/
         try {
             if (Double.parseDouble(word) < 0 && word.contains(".") && word.contains("-")) {
                 isValid = true;
             } else if (Double.parseDouble(word) >= 1 && word.contains(".")) {
                 isValid = true;
             }
-            /*return (word.contains("-") || Double.parseDouble(word) % 2 == 0 || Double.parseDouble(word) % 2 >= 1 || Double.parseDouble(word) % 1 >= 1
-                     && word.contains("."));*/
         } catch (NumberFormatException nfe){
             isValid = false;
         }
