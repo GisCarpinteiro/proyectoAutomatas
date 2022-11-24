@@ -13,13 +13,15 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
-    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String", "Boolean", "char", "true", "false", "return"};
+    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String", "Boolean", "char", "true", "false", "return", "break"};
     public int tokenReservedW = 0;
 
     Boolean identifier(String word) {
         boolean isValid = false;
         boolean flagReserved = false;
             if( ( word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)){
+                System.out.println("PALABRAS" + word.charAt(0));
+
                 for(int i=0; i<reservedWords.length; i++ ){
 
                     if(word.equals(reservedWords[i])) {
@@ -27,6 +29,7 @@ public class Tokens {
                         flagReserved = true;
                     }
                     if(i == reservedWords.length-1 && !flagReserved){
+                        System.out.println("PALABRAS" + word);
                         isValid = true;
                         break;
                     }
