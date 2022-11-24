@@ -24,7 +24,6 @@ public class Tokens {
 
                     if(word.equals(reservedWords[i])) {
                         tokenReservedW++;
-                        System.out.println("token: " + tokenReservedW);
                         flagReserved = true;
                     }
                     if(i == reservedWords.length-1 && !flagReserved){
