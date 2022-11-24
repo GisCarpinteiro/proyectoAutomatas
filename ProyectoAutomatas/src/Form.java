@@ -24,6 +24,8 @@ public class Form extends JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         tvIdentificador = new javax.swing.JLabel();
+        tvReservadas = new javax.swing.JLabel();
+        tvError = new javax.swing.JLabel();
         tvOperadorRelacional = new javax.swing.JLabel();
         tvOperadorLogico = new javax.swing.JLabel();
         tvOperadorAritmetico = new javax.swing.JLabel();
@@ -68,6 +70,8 @@ public class Form extends JFrame {
                                         .addComponent(tvNumEnteros)
                                         .addComponent(jLabel1)
                                         .addComponent(tvIdentificador)
+                                        .addComponent(tvReservadas)
+                                        .addComponent(tvError)
                                         .addComponent(tvOperadorRelacional)
                                         .addComponent(tvOperadorLogico)
                                         .addComponent(tvOperadorAritmetico)
@@ -83,6 +87,10 @@ public class Form extends JFrame {
                                                 .addComponent(jLabel1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(tvIdentificador)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tvReservadas)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tvError)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(tvOperadorRelacional)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -128,6 +136,7 @@ public class Form extends JFrame {
         int parenthesisToken = 0;
         int bracketsToken = 0;
         int errorToken = 0;
+        Boolean flag = false;
 
 
 
@@ -151,35 +160,36 @@ public class Form extends JFrame {
                 //System.out.println("Char " + i + " is " + s.charAt(i));
 
                 //Automata, idetificar
-                if (tokens.identifier(s)) identifierToken++;
-                else errorToken++;
+                if (tokens.identifier(s)) { identifierToken++; flag = tokens.identifier(s); };
 
                 //Automata, operador aritemtico, evaluando: +, * y %
-                if (tokens.arithmeticOperator(s)) arithmeticOperatorToken++;
+                if (tokens.arithmeticOperator(s)) { arithmeticOperatorToken++; flag = tokens.arithmeticOperator(s); };
 
                 //Automata, asignacion, evaluando: =
-                if (tokens.assignmentOperator(s)) assignmentToken++;
+                if (tokens.assignmentOperator(s)){ assignmentToken++; flag = tokens.assignmentOperator(s);}
 
                 //Automata, operadores logicos, evaluando &&, ||, !
-                if (tokens.logicOperator(s)) logicOperatorToken++;
+                if (tokens.logicOperator(s)) { logicOperatorToken++; flag = tokens.logicOperator(s); };
 
                 //Automata, operadores logicos, evaluando <, >, <=, >=, ==, !=
-                if (tokens.relationalOperator(s)) relationalOperatorToken++;
+                if (tokens.relationalOperator(s)){ relationalOperatorToken++; flag = tokens.relationalOperator(s); };
 
                 //Automata, llaves: {, }
-                if (tokens.brackets(s)) bracketsToken++;
+                if (tokens.brackets(s)){ bracketsToken++; flag = tokens.brackets(s); };
 
                 //Automata, parentesis: (, )
-                if (tokens.parenthesis(s)) parenthesisToken++;
+                if (tokens.parenthesis(s)){ parenthesisToken++; flag = tokens.parenthesis(s);}
 
                 //Automata, numeros enteros
-                if (tokens.numberWholeValidation(s)) wholeNumberToken++;
+                if (tokens.numberWholeValidation(s)){ wholeNumberToken++; flag = tokens.numberWholeValidation(s); };
 
                 //Automata, numeros decimales
-                if (tokens.numberDecimalValidation(s)) decimalNumberToken++;
+                if (tokens.numberDecimalValidation(s)){ decimalNumberToken++; flag = tokens.numberDecimalValidation(s);}
 
                 //Automata, comentario con formato: /* */
-                if (tokens.comment(s)) commentToken++;
+                if (tokens.comment(s)){ commentToken++; flag = tokens.comment(s);}
+
+                if (!flag) errorToken++;
 
                 //evaluar "-", numeros decimales y enteros
                     /*if (s.charAt(i) == '-') {
@@ -215,7 +225,8 @@ public class Form extends JFrame {
             /*System.out.println("Tamaño del texto: " + tokensList.size());
             System.out.println("Texto: " + tokensList.get(0));
             System.out.println("Texto: " + tokensList.get(1));*/
-            tvIdentificador.setText("Operadores de asignacion:" + errorToken);
+            tvIdentificador.setText("Identificador:" + identifierToken);
+            tvReservadas.setText("Reservadas:" + tokens.tokenReservedW);
             tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
             tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
             tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
@@ -225,6 +236,8 @@ public class Form extends JFrame {
             tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
             tvNumDecimales.setText("Numeros decimales econtrados: " + decimalNumberToken);
             tvComentarios.setText("Comentarios encontrados: " + commentToken);
+            tvError.setText("Errores encontrados:" + errorToken);
+
             jTextArea1.setText(texto.toString());
 
             JOptionPane.showMessageDialog(null, "Leido correctamente");
@@ -259,6 +272,7 @@ public class Form extends JFrame {
     private javax.swing.JLabel tvAsignacion;
     private javax.swing.JLabel tvComentarios;
     private javax.swing.JLabel tvIdentificador;
+    private javax.swing.JLabel tvReservadas;
     private javax.swing.JLabel tvLlave;
     private javax.swing.JLabel tvNumDecimales;
     private javax.swing.JLabel tvNumEnteros;
@@ -266,5 +280,7 @@ public class Form extends JFrame {
     private javax.swing.JLabel tvOperadorLogico;
     private javax.swing.JLabel tvOperadorRelacional;
     private javax.swing.JLabel tvParentesis;
+    private javax.swing.JLabel tvError;
+
     // End of variables declaration
 }

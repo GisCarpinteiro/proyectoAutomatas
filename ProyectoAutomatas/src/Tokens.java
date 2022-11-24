@@ -1,8 +1,4 @@
-/**
- * @author David Alejando Gonzalez Quezada
- * @project ProyectoAutomatas
- * 19/11/22
- */
+
 public class Tokens {
 
     /*Lista de tokens:
@@ -17,10 +13,27 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
+    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String", "Boolean", "char", "true", "false", "return"};
+    public int tokenReservedW = 0;
+
     Boolean identifier(String word) {
         boolean isValid = false;
+        boolean flagReserved = false;
+            if( ( word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)){
+                for(int i=0; i<reservedWords.length; i++ ){
 
-        return isValid;
+                    if(word.equals(reservedWords[i])) {
+                        tokenReservedW++;
+                        System.out.println("token: " + tokenReservedW);
+                        flagReserved = true;
+                    }
+                    if(i == reservedWords.length-1 && !flagReserved){
+                        isValid = true;
+                        break;
+                    }
+                }
+            }
+            return isValid;
     }
 
     boolean comment(String word) {
