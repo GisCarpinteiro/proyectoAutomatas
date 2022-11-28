@@ -157,7 +157,15 @@ public class Form extends JFrame {
 
             // StrCharAt.java
             for (String s : tokensList) {
+                switch (s.charAt(0)){
+                    boolean valid = ( s.charAt(0) > 96 && s.charAt(0) < 123) || (s.charAt(0) > 64 && s.charAt(0) < 91);
+
+                    case 96: {
+
+                    }
+                }
                 //System.out.println("Char " + i + " is " + s.charAt(i));
+
 
                 //Automata, idetificar
                 if (tokens.identifier(s)) { identifierToken++; flag = tokens.identifier(s); };

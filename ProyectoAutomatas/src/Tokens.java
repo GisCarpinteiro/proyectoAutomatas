@@ -1,6 +1,8 @@
 
 public class Tokens {
 
+    private int error = 0;
+
     /*Lista de tokens:
     * idetificador:
     * operador relacional: terminado
@@ -13,7 +15,8 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
-    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String", "Boolean", "char", "true", "false", "return", "break"};
+    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String",
+            "Boolean", "char", "true", "false", "return", "break"};
     public int tokenReservedW = 0;
 
     Boolean identifier(String word) {
