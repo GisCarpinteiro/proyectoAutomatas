@@ -2,6 +2,8 @@
 public class Tokens {
 
     private int error = 0;
+    public int flagR = 0;
+
 
     /*Lista de tokens:
     * idetificador:
@@ -15,14 +17,14 @@ public class Tokens {
     * parentesis: termiando
     * llave: terminado*/
 
-    String reservedWords [] = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String",
+    String[] reservedWords = {"if", "else",  "switch", "while", "case", "for", "default", "double", "int", "String",
             "Boolean", "char", "true", "false", "return", "break"};
     public int tokenReservedW = 0;
 
     Boolean identifier(String word) {
         boolean isValid = false;
         boolean flagReserved = false;
-            if( ( word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)){
+            if((word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)){
                 System.out.println("PALABRAS" + word.charAt(0));
 
                 for(int i=0; i<reservedWords.length; i++ ){
@@ -30,6 +32,7 @@ public class Tokens {
                     if(word.equals(reservedWords[i])) {
                         tokenReservedW++;
                         flagReserved = true;
+                        flagR++;
                     }
                     if(i == reservedWords.length-1 && !flagReserved){
                         System.out.println("PALABRAS" + word);
@@ -105,7 +108,7 @@ public class Tokens {
                 isValid = true;
             }
         } catch (NumberFormatException nfe){
-            isValid = false;
+            System.out.println(nfe);
         }
         return isValid;
     }

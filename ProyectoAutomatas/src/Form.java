@@ -136,11 +136,10 @@ public class Form extends JFrame {
         int parenthesisToken = 0;
         int bracketsToken = 0;
         int errorToken = 0;
-        Boolean flag = false;
-
-
+        boolean flag;
 
         try{
+            flag = false;
             //Leer archivo
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
@@ -157,84 +156,95 @@ public class Form extends JFrame {
 
             // StrCharAt.java
             for (String s : tokensList) {
-                switch (s.charAt(0)){
-                    boolean valid = ( s.charAt(0) > 96 && s.charAt(0) < 123) || (s.charAt(0) > 64 && s.charAt(0) < 91);
+                /*switch (s.charAt(0)){
+                    boolean valid = (s.charAt(0) > 96 && s.charAt(0) < 123) || (s.charAt(0) > 64 && s.charAt(0) < 91);
 
                     case 96: {
 
                     }
-                }
+                }*/
                 //System.out.println("Char " + i + " is " + s.charAt(i));
 
-
                 //Automata, idetificar
-                if (tokens.identifier(s)) { identifierToken++; flag = tokens.identifier(s); };
+                if (flag = tokens.identifier(s)) {
+                    identifierToken++;
+                    //flag = tokens.identifier(s);
+                }
 
                 //Automata, operador aritemtico, evaluando: +, * y %
-                if (tokens.arithmeticOperator(s)) { arithmeticOperatorToken++; flag = tokens.arithmeticOperator(s); };
+                if (tokens.arithmeticOperator(s)) {
+                    arithmeticOperatorToken++;
+                    flag = tokens.arithmeticOperator(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, asignacion, evaluando: =
-                if (tokens.assignmentOperator(s)){ assignmentToken++; flag = tokens.assignmentOperator(s);}
+                if (tokens.assignmentOperator(s)){
+                    assignmentToken++;
+                    flag = tokens.assignmentOperator(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, operadores logicos, evaluando &&, ||, !
-                if (tokens.logicOperator(s)) { logicOperatorToken++; flag = tokens.logicOperator(s); };
+                if (tokens.logicOperator(s)) {
+                    logicOperatorToken++;
+                    flag = tokens.logicOperator(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, operadores logicos, evaluando <, >, <=, >=, ==, !=
-                if (tokens.relationalOperator(s)){ relationalOperatorToken++; flag = tokens.relationalOperator(s); };
+                if (tokens.relationalOperator(s)){
+                    relationalOperatorToken++;
+                    flag = tokens.relationalOperator(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, llaves: {, }
-                if (tokens.brackets(s)){ bracketsToken++; flag = tokens.brackets(s); };
+                if (tokens.brackets(s)){
+                    bracketsToken++;
+                    flag = tokens.brackets(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, parentesis: (, )
-                if (tokens.parenthesis(s)){ parenthesisToken++; flag = tokens.parenthesis(s);}
+                if (tokens.parenthesis(s)){
+                    parenthesisToken++;
+                    flag = tokens.parenthesis(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, numeros enteros
-                if (tokens.numberWholeValidation(s)){ wholeNumberToken++; flag = tokens.numberWholeValidation(s); };
+                if (tokens.numberWholeValidation(s)){
+                    wholeNumberToken++;
+                    flag = tokens.numberWholeValidation(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, numeros decimales
-                if (tokens.numberDecimalValidation(s)){ decimalNumberToken++; flag = tokens.numberDecimalValidation(s);}
+                if (tokens.numberDecimalValidation(s)){
+                    decimalNumberToken++;
+                    flag = tokens.numberDecimalValidation(s);
+                    System.out.println("error  "  +  s + ": " + flag);
+                }
 
                 //Automata, comentario con formato: /* */
-                if (tokens.comment(s)){ commentToken++; flag = tokens.comment(s);}
+                if (tokens.comment(s)){
+                    commentToken++;
+                    flag = tokens.comment(s);
+                    System.out.println("error comment" +  s + ": " + flag);
+                }
 
-                if (!flag) errorToken++;
-
-                //evaluar "-", numeros decimales y enteros
-                    /*if (s.charAt(i) == '-') {
-
-                        if (s.length() > 1) {
-                            //evaluar si es numero
-                            char c = s.charAt(i);
-                            System.out.println(c);
-                            if (c < '0' || c > '9') {
-
-                                if (s.charAt(i) % 2 == 0) {
-                                    System.out.println("es un numero entero");
-                                } else {
-                                    System.out.println("es un numero decimal");
-                                }
-                            }
-                        } else {
-                            System.out.println("puede ser operador aritmetico o numero negativo");
-                        }
-                    }*/
-
-                //automata numeros enteros y decimales
-                    /*if (s.charAt(i) == '0' || s.charAt(i) == '1' || s.charAt(i) == '2' || s.charAt(i) == '3'
-                            || s.charAt(i) == '4' || s.charAt(i) == '5' || s.charAt(i) == '6' || s.charAt(i) == '7'
-                            || s.charAt(i) == '8' || s.charAt(i) == '9') {
-                        System.out.println("puede ser operador aritmetico o numero negativo");
-
-
-                    }*/
-
+                if (!flag || s.charAt(0) == ' ') {
+                    System.out.println("flag  " +  s + ": " + flag);
+                    errorToken++;
+                }
             }
 
             /*System.out.println("Tamaño del texto: " + tokensList.size());
             System.out.println("Texto: " + tokensList.get(0));
             System.out.println("Texto: " + tokensList.get(1));*/
-            tvIdentificador.setText("Identificador:" + identifierToken);
-            tvReservadas.setText("Reservadas:" + tokens.tokenReservedW);
+            tvIdentificador.setText("Identificador: " + identifierToken);
+            tvReservadas.setText("Reservadas: " + tokens.tokenReservedW);
             tvOperadorAritmetico.setText("Operadores aritmeticos encontrados: " + arithmeticOperatorToken);
             tvAsignacion.setText("Operadores de asignacion encontrados: " + assignmentToken);
             tvOperadorLogico.setText("Operadores logicos encontrados: " + logicOperatorToken);
@@ -244,7 +254,7 @@ public class Form extends JFrame {
             tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
             tvNumDecimales.setText("Numeros decimales econtrados: " + decimalNumberToken);
             tvComentarios.setText("Comentarios encontrados: " + commentToken);
-            tvError.setText("Errores encontrados:" + errorToken);
+            tvError.setText("Errores encontrados: " + (errorToken - tokens.flagR - 1));
 
             jTextArea1.setText(texto.toString());
 
