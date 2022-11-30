@@ -254,7 +254,7 @@ public class Form extends JFrame {
             tvNumEnteros.setText("Numeros enteros econtrados: " + wholeNumberToken);
             tvNumDecimales.setText("Numeros decimales econtrados: " + decimalNumberToken);
             tvComentarios.setText("Comentarios encontrados: " + commentToken);
-            tvError.setText("Errores encontrados: " + (errorToken - tokens.flagR - 1));
+            tvError.setText("Errores encontrados: " + (errorToken - tokens.flagR ));
 
             jTextArea1.setText(texto.toString());
 
