@@ -24,22 +24,33 @@ public class Tokens {
     Boolean identifier(String word) {
         boolean isValid = false;
         boolean flagReserved = false;
-            if((word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)){
-                System.out.println("PALABRAS" + word.charAt(0));
+            if((word.charAt(0) > 96 && word.charAt(0) < 123) || (word.charAt(0) > 64 && word.charAt(0) < 91)) {
 
-                for(int i=0; i<reservedWords.length; i++ ){
+                    for (int i = 0; i < reservedWords.length; i++) {
 
-                    if(word.equals(reservedWords[i])) {
-                        tokenReservedW++;
-                        flagReserved = true;
-                        flagR++;
-                    }
-                    if(i == reservedWords.length-1 && !flagReserved){
-                        System.out.println("PALABRAS" + word);
-                        isValid = true;
+                        if (word.equals(reservedWords[i])) {
+                            tokenReservedW++;
+                            flagReserved = true;
+                            flagR++;
+                        }
+
+                        if (i == reservedWords.length - 1 && !flagReserved) {
+
+                            for(int j= 0 ; j<word.length(); j++) {
+
+                                if (word.charAt(j) == '.') {
+                                    isValid = false;
+                                    break;
+                                }
+                                else {
+                                    System.out.println("PALABRAS" + word);
+                                    isValid = true;
+                                }
+                            }
                         break;
+                        }
                     }
-                }
+
             }
             return isValid;
     }
