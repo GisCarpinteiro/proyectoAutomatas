@@ -37,15 +37,14 @@ public class Tokens {
                         if (i == reservedWords.length - 1 && !flagReserved) {
 
                             for(int j= 0 ; j<word.length(); j++) {
-
-                                if (word.charAt(j) == '.') {
+                                if((word.charAt(j) > 96 && word.charAt(j) < 123) || (word.charAt(j) > 64 && word.charAt(j) < 91) || word.charAt(j) == 95) {
+                                    isValid = true;
+                                }
+                                else{
                                     isValid = false;
                                     break;
                                 }
-                                else {
-                                    System.out.println("PALABRAS" + word);
-                                    isValid = true;
-                                }
+                                
                             }
                         break;
                         }
